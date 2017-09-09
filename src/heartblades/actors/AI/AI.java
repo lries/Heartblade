@@ -1,12 +1,9 @@
 package heartblades.actors.AI;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import heartblades.actors.Actor;
 import heartblades.core.Core;
-import heartblades.movement.Direction;
 
 public abstract class AI {
 

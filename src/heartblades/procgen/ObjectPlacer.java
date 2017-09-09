@@ -1,5 +1,6 @@
 package heartblades.procgen;
 
+import heartblades.actors.Actor;
 import heartblades.core.Core;
 import heartblades.map.Dungeon;
 import heartblades.map.Tile;
@@ -34,6 +35,19 @@ public class ObjectPlacer {
 				new Glyph( '<', down[posXDown][posYDown].getGlyph( ).getColor( ) ) );
 
 		Core.debug( posXUp + " " + posYUp );
+
+	}
+
+	public static void placeActor( Actor actor, Dungeon dungeon ) {
+		int x = -1;
+		int y = -1;
+
+		do {
+			x = Core.random.nextInt( dungeon.getTiles( ).length );
+			y = Core.random.nextInt( dungeon.getTiles( )[x].length );
+		}
+		while ( !dungeon.placeAt( x, y, actor ) );
+
 
 	}
 

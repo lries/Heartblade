@@ -74,15 +74,19 @@ public class Actor {
 
 	public void onTurn( ) {
 		ai.onTurn( );
-	}
-
-	public void decreaseTUs( int tu ) {
-		turns -= tu;
+		turns += speed;
 	}
 
 	public boolean onTurn( KeyEvent e ) {
-		return ai.onTurn( e );
-
+		if ( ai.onTurn( e ) ) {
+			turns += speed; 
+			return true; 
+		}
+		return false; 
+	}
+	
+	public void decreaseTUs( int tu ) {
+		turns -= tu;
 	}
 
 	public boolean move( int direction ) {

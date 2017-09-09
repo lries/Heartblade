@@ -9,6 +9,7 @@ import heartblades.movement.Direction;
 import heartblades.movement.MovementTag;
 import heartblades.movement.CircularRange;
 import heartblades.procgen.DrunkenCorridors;
+import heartblades.procgen.FloorActorGeneration;
 import heartblades.rendering.Glyph;
 import heartblades.rendering.RenderingUtils;
 
@@ -53,6 +54,7 @@ public class Dungeon {
 			}
 		}
 		DrunkenCorridors.drunkenCorridors( tiles, TileFactory.floor1Wall( ), 2, 10, 25, 3, 5, 3, 5 );
+		FloorActorGeneration.generateTestFloorActors( this );
 
 	}
 
@@ -106,7 +108,7 @@ public class Dungeon {
 				&& tiles[x][y].canWalk( new MovementTag[] { MovementTag.WALK } ));
 	}
 
-	protected boolean placeAt( int x, int y, Actor a ) {
+	public boolean placeAt( int x, int y, Actor a ) {
 
 		if ( actors[x][y] != null ) {
 			return false;
