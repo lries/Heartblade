@@ -1,6 +1,8 @@
 package heartblades.map;
 
 import java.awt.event.KeyEvent;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 import heartblades.actors.Actor;
 import heartblades.core.Core;
@@ -17,6 +19,7 @@ public class Dungeon {
 
 	protected Tile[][] tiles;
 	protected Actor[][] actors;
+	protected PriorityQueue<Actor> turnOrder;
 
 	protected int[] stairsUpLoc;
 	protected int[] stairsDownLoc;
@@ -53,6 +56,7 @@ public class Dungeon {
 				tiles[x][y] = TileFactory.floor1Floor( );
 			}
 		}
+		turnOrder = new PriorityQueue<Actor>(new SpeedComparator() );
 		DrunkenCorridors.drunkenCorridors( tiles, TileFactory.floor1Wall( ), 2, 10, 25, 3, 5, 3, 5 );
 		FloorActorGeneration.generateTestFloorActors( this );
 
@@ -117,6 +121,7 @@ public class Dungeon {
 		if ( tiles[x][y].canWalk( a.getWalkTypes( ) ) ) {
 			actors[x][y] = a;
 			a.setDungeon( this, x, y );
+			turnOrder.add( a );
 			return true;
 		}
 
@@ -125,6 +130,8 @@ public class Dungeon {
 
 	public void onTurn( int minX, int maxX, int minY, int maxY, KeyEvent e ) {
 
+		System.out.println( "Player turn" );
+		
 		int TUs = Core.player.getTU( );
 
 		boolean go = Core.player.onTurn( e );
@@ -135,29 +142,24 @@ public class Dungeon {
 
 		decreaseAllTUs( TUs, Core.player );
 
-		int min = Integer.MAX_VALUE;
+		turnOrder.add( Core.player );
+		
 		Actor mover = null;
-
 		while ( true ) {
-			for ( int x = 0; x < actors.length; x++ ) {
-				for ( int y = 0; y < actors[0].length; y++ ) {
-					if ( actors[x][y] != null ) {
-						if ( actors[x][y].getTU( ) <= min ) {
-							min = actors[x][y].getTU( );
-							mover = actors[x][y];
-						}
-					}
-				}
-			}
+			mover = turnOrder.remove( );
 
 			if ( mover == null || mover == Core.player ) {
 				break;
 			}
+			
+			System.out.println( "Plant turn" );
 
 			TUs = mover.getTU( );
 			mover.onTurn( );
 			decreaseAllTUs( TUs, mover );
-
+			
+			turnOrder.add( mover );
+			
 			render( minX, maxX, minY, maxY );
 			RenderingUtils.repaint( );
 		}
