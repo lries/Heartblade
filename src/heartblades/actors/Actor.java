@@ -21,20 +21,13 @@ public class Actor {
 	protected MovementTag[] walkTypes;
 	protected Memory memory;
 	protected int turns, speed;
+	protected ActorTeam team; 
 
-	public Actor( AI ai, Glyph glyph, int speed, int vision ) {
-		this.ai = ai;
-		this.vision = vision;
-		this.glyph = glyph;
-		this.walkTypes = new MovementTag[] { MovementTag.WALK };
-		this.speed = speed;
-		this.turns = speed;
-		this.range = new CircularRange( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
-		this.memory = new Memory( );
-		ai.setHolder( this );
+	public Actor( AI ai, Glyph glyph, int speed, int vision, ActorTeam team ) {
+		this( ai, glyph, new MovementTag[] { MovementTag.WALK }, speed, vision, team ); 
 	}
 
-	public Actor( AI ai, Glyph glyph, MovementTag[] walkTypes, int speed, int vision ) {
+	public Actor( AI ai, Glyph glyph, MovementTag[] walkTypes, int speed, int vision, ActorTeam team ) {
 		this.ai = ai;
 		this.glyph = glyph;
 		this.walkTypes = walkTypes;
@@ -43,6 +36,7 @@ public class Actor {
 		this.vision = vision;
 		this.range = new CircularRange( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
 		this.memory = new Memory( );
+		this.team = team;
 		ai.setHolder( this );
 	}
 
@@ -136,5 +130,9 @@ public class Actor {
 
 	public boolean tileInMemory( Dungeon dungeon2, int x, int y ) {
 		return memory.knowsTile( dungeon2, x, y );
+	}
+
+	public ActorTeam getTeam( ) {
+		return team;
 	}
 }

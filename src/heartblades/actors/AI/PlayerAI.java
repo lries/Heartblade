@@ -2,6 +2,7 @@ package heartblades.actors.AI;
 
 import java.awt.event.KeyEvent;
 
+import heartblades.actors.Actor;
 import heartblades.core.Core;
 import heartblades.movement.Direction;
 import heartblades.rendering.RenderingUtils;
@@ -61,6 +62,11 @@ public class PlayerAI extends AI {
 		}	
 		
 		return false; 
+	}
+
+	@Override
+	public boolean isAggressiveTo( Actor actor ) {
+		return false;
 	}
 	
 }

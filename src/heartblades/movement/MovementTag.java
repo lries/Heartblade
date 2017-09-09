@@ -2,7 +2,7 @@ package heartblades.movement;
 
 public enum MovementTag {
 
-	LIGHT, WALK, FLY, SWIM, GHOST;
+	LIGHT, WALK, FLY, SWIM, GHOST, IMMOBILE;
 
 	public static MovementTag[] land = { LIGHT, WALK, FLY, GHOST };
 	public static MovementTag[] sea = { LIGHT, FLY, SWIM, GHOST };

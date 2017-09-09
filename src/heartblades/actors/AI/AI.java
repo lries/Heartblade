@@ -1,11 +1,14 @@
 package heartblades.actors.AI;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import heartblades.actors.Actor;
 import heartblades.core.Core;
+import heartblades.movement.Direction;
 
-public class AI {
+public abstract class AI {
 
 	protected Actor holder;
 
@@ -17,9 +20,7 @@ public class AI {
 		this.holder = holder;
 	}
 
-	public void onTurn( ) {
-
-	}
+	public abstract void onTurn( );
 
 	public boolean onTurn( KeyEvent e ) {
 		Core.debug( "WARNING: Non-player KeyEvent turn" );
@@ -33,6 +34,17 @@ public class AI {
 
 	public boolean onActorCollision( Actor actor ) {
 		return false;
+	}
+	
+	public abstract boolean isAggressiveTo( Actor actor );
+	
+	public boolean hunt( Actor actor ) { 
+		// TODO Not yet implemented 
+		return false; 
+	}
+	
+	public void wander( ) { 
+		// TODO Not yet implemented
 	}
 
 }
