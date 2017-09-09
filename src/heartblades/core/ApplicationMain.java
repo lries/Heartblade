@@ -1,4 +1,5 @@
 package heartblades.core;
+
 import javax.swing.JFrame;
 
 import asciiPanel.AsciiFont;
@@ -12,43 +13,45 @@ import heartblades.screens.MainScreen;
 
 public class ApplicationMain extends JFrame implements KeyListener {
 	private static final long serialVersionUID = 1060623638149583738L;
-	
+
 	private AsciiPanel terminal;
-	
-	public ApplicationMain(){
-		super();
-		RenderingUtils.setApplicationMain(this);
-		terminal = new AsciiPanel(60,41,AsciiFont.CP437_16x16);
-		RenderingUtils.terminal = terminal; 
-		add(terminal);
-		pack();
-		RenderingUtils.setScreen(new MainScreen());
-		addKeyListener(this);
-		repaint();
-	}
-	
-	@Override
-	public void repaint(){
-		terminal.clear();
-		RenderingUtils.getScreen().render();
-		super.repaint();
+
+	public ApplicationMain( ) {
+		super( );
+		RenderingUtils.setApplicationMain( this );
+		terminal = new AsciiPanel( 60, 41, AsciiFont.CP437_16x16 );
+		RenderingUtils.terminal = terminal;
+		add( terminal );
+		pack( );
+		RenderingUtils.setScreen( new MainScreen( ) );
+		addKeyListener( this );
+		repaint( );
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		RenderingUtils.getScreen().onTurn(e);
-		repaint();
+	public void repaint( ) {
+		terminal.clear( );
+		RenderingUtils.getScreen( ).render( );
+		super.repaint( );
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) { }
+	public void keyPressed( KeyEvent e ) {
+		RenderingUtils.getScreen( ).onTurn( e );
+		repaint( );
+	}
 
 	@Override
-	public void keyTyped(KeyEvent e) { }
-	
-	public static void main(String[] args) {
-		ApplicationMain app = new ApplicationMain();
-		app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		app.setVisible(true);
+	public void keyReleased( KeyEvent e ) {
+	}
+
+	@Override
+	public void keyTyped( KeyEvent e ) {
+	}
+
+	public static void main( String[] args ) {
+		ApplicationMain app = new ApplicationMain( );
+		app.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		app.setVisible( true );
 	}
 }

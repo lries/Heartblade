@@ -10,39 +10,40 @@ import heartblades.ui.InfoPanel;
 
 public class DungeonScreen extends Screen {
 
-	protected InfoPanel panel = new InfoPanel(); 
-	protected Dungeon dungeon = new Dungeon(100,100);
-	protected int rightPadding = 15; 
-	
+	protected InfoPanel panel = new InfoPanel( );
+	protected Dungeon dungeon = new Dungeon( 100, 100 );
+	protected int rightPadding = 15;
 
-	public DungeonScreen(){
-		dungeon.placeActorRandomly(ActorFactory.getPlayer());
-		Dungeon dungeon2 = new Dungeon(100,100);
-		ObjectPlacer.placeStairs(dungeon, dungeon2);
-	}
-	
-	public DungeonScreen(Dungeon dungeon){
-		this.dungeon = dungeon; 
+	public DungeonScreen( ) {
+		dungeon.placeActorRandomly( ActorFactory.getPlayer( ) );
+		Dungeon dungeon2 = new Dungeon( 100, 100 );
+		ObjectPlacer.placeStairs( dungeon, dungeon2 );
 	}
 
-	@Override
-	public void onTurn(KeyEvent e) {
-		render();
-		dungeon.onTurn(leftPadding, RenderingUtils.terminal.getWidthInCharacters() - rightPadding, upPadding, RenderingUtils.terminal.getHeightInCharacters() - downPadding, e);
+	public DungeonScreen( Dungeon dungeon ) {
+		this.dungeon = dungeon;
 	}
 
 	@Override
-	public void onOpen() {
+	public void onTurn( KeyEvent e ) {
+		render( );
+		dungeon.onTurn( leftPadding, RenderingUtils.terminal.getWidthInCharacters( ) - rightPadding, upPadding,
+				RenderingUtils.terminal.getHeightInCharacters( ) - downPadding, e );
 	}
 
 	@Override
-	public void onClose() {
+	public void onOpen( ) {
 	}
 
 	@Override
-	public void render() {
-		dungeon.render(leftPadding, RenderingUtils.terminal.getWidthInCharacters()-rightPadding, downPadding, RenderingUtils.terminal.getHeightInCharacters()-upPadding);
-		panel.render();
+	public void onClose( ) {
+	}
+
+	@Override
+	public void render( ) {
+		dungeon.render( leftPadding, RenderingUtils.terminal.getWidthInCharacters( ) - rightPadding, downPadding,
+				RenderingUtils.terminal.getHeightInCharacters( ) - upPadding );
+		panel.render( );
 	}
 
 }

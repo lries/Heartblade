@@ -8,13 +8,13 @@ import heartblades.rendering.Glyph;
 
 public class ActorFactory {
 
-	public static Actor getPlayer() {
-		if (Core.player != null) {
+	public static Actor getPlayer( ) {
+		if ( Core.player != null ) {
 			return Core.player;
 		}
-		
-		Core.player = new Actor(new PlayerAI(), new Glyph('@', AsciiPanel.brightWhite), 100, 6);
-		return Core.player; 
+
+		Core.player = new Actor( new PlayerAI( ), new Glyph( '@', AsciiPanel.brightWhite ), 100, 6 );
+		return Core.player;
 	}
-	
+
 }
