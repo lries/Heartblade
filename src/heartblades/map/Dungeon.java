@@ -7,7 +7,7 @@ import heartblades.core.Core;
 import heartblades.factory.TileFactory;
 import heartblades.movement.Direction;
 import heartblades.movement.MovementTag;
-import heartblades.movement.Range;
+import heartblades.movement.CircularRange;
 import heartblades.procgen.DrunkenCorridors;
 import heartblades.rendering.Glyph;
 import heartblades.rendering.RenderingUtils;
@@ -225,7 +225,7 @@ public class Dungeon {
 	}
 
 	public boolean isShadow( int x, int y ) {
-		Range range = Core.player.getRange( );
+		CircularRange range = Core.player.getRange( );
 		for ( int[] point : range.getRange( ) ) {
 			if ( point[0] == x && point[1] == y ) {
 				return false;

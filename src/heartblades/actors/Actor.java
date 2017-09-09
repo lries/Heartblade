@@ -6,7 +6,7 @@ import heartblades.actors.AI.AI;
 import heartblades.map.Dungeon;
 import heartblades.movement.Direction;
 import heartblades.movement.MovementTag;
-import heartblades.movement.Range;
+import heartblades.movement.CircularRange;
 import heartblades.rendering.Glyph;
 
 public class Actor {
@@ -17,7 +17,7 @@ public class Actor {
 	protected int posY;
 	protected int vision;
 	protected Dungeon dungeon;
-	protected Range range;
+	protected CircularRange range;
 	protected MovementTag[] walkTypes;
 	protected Memory memory;
 	protected int turns, speed;
@@ -29,7 +29,7 @@ public class Actor {
 		this.walkTypes = new MovementTag[] { MovementTag.WALK };
 		this.speed = speed;
 		this.turns = speed;
-		this.range = new Range( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
+		this.range = new CircularRange( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
 		this.memory = new Memory( );
 		ai.setHolder( this );
 	}
@@ -41,7 +41,7 @@ public class Actor {
 		this.speed = speed;
 		this.turns = speed;
 		this.vision = vision;
-		this.range = new Range( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
+		this.range = new CircularRange( dungeon, new MovementTag[] { MovementTag.LIGHT }, 0, 0, vision );
 		this.memory = new Memory( );
 		ai.setHolder( this );
 	}
@@ -128,7 +128,7 @@ public class Actor {
 		return dungeon;
 	}
 
-	public Range getRange( ) {
+	public CircularRange getRange( ) {
 		for ( int[] point : range.getRange( ) ) {
 			memory.learnTile( dungeon, point[0], point[1] );
 		}
