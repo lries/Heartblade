@@ -1,7 +1,8 @@
 package heartblades.map;
 
 import java.awt.event.KeyEvent;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import heartblades.actors.Actor;
@@ -56,7 +57,7 @@ public class Dungeon {
 				tiles[x][y] = TileFactory.floor1Floor( );
 			}
 		}
-		turnOrder = new PriorityQueue<Actor>(new SpeedComparator() );
+		turnOrder = new PriorityQueue<Actor>( new SpeedComparator( ) );
 		DrunkenCorridors.drunkenCorridors( tiles, TileFactory.floor1Wall( ), 2, 10, 25, 3, 5, 3, 5 );
 		FloorActorGeneration.generateTestFloorActors( this );
 
@@ -130,8 +131,6 @@ public class Dungeon {
 
 	public void onTurn( int minX, int maxX, int minY, int maxY, KeyEvent e ) {
 
-		System.out.println( "Player turn" );
-		
 		int TUs = Core.player.getTU( );
 
 		boolean go = Core.player.onTurn( e );
@@ -140,10 +139,10 @@ public class Dungeon {
 			return;
 		}
 
-		decreaseAllTUs( TUs, Core.player );
+		decreaseAllTUs( TUs );
 
 		turnOrder.add( Core.player );
-		
+
 		Actor mover = null;
 		while ( true ) {
 			mover = turnOrder.remove( );
@@ -151,27 +150,30 @@ public class Dungeon {
 			if ( mover == null || mover == Core.player ) {
 				break;
 			}
-			
+
 			System.out.println( "Plant turn" );
 
 			TUs = mover.getTU( );
 			mover.onTurn( );
-			decreaseAllTUs( TUs, mover );
-			
+			decreaseAllTUs( TUs );
+
 			turnOrder.add( mover );
-			
+
 			render( minX, maxX, minY, maxY );
 			RenderingUtils.repaint( );
 		}
 	}
 
-	protected void decreaseAllTUs( int TUs, Actor exempt ) {
-		for ( int x = 0; x < actors.length; x++ ) {
-			for ( int y = 0; y < actors[0].length; y++ ) {
-				if ( actors[x][y] != null && actors[x][y] != exempt ) {
-					actors[x][y].decreaseTUs( TUs );
-				}
-			}
+	protected void decreaseAllTUs( int TUs ) {
+		List<Actor> actors = new ArrayList<Actor>( );
+		while ( !turnOrder.isEmpty( ) ) {
+			Actor actor = turnOrder.remove( );
+			actor.decreaseTUs( TUs );
+			actors.add( actor );
+		}
+
+		for ( Actor actor : actors ) {
+			turnOrder.add( actor );
 		}
 	}
 

@@ -6,7 +6,7 @@ public class PlantAI extends AI {
 
 	@Override
 	public void onTurn( ) {
-		
+
 	}
 
 	@Override

@@ -30,8 +30,10 @@ public class ApplicationMain extends JFrame implements KeyListener {
 
 	@Override
 	public void repaint( ) {
+		System.out.println( "repainting" );
 		terminal.clear( );
 		RenderingUtils.getScreen( ).render( );
+		terminal.repaint( );
 		super.repaint( );
 	}
 
