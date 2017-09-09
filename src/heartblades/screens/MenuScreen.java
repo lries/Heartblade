@@ -10,7 +10,7 @@ import heartblades.rendering.GlyphString;
 import heartblades.rendering.Menu;
 import heartblades.rendering.RenderingUtils;
 
-public class MenuScreen extends Screen {
+public abstract class MenuScreen extends Screen {
 
 	protected Menu menu;
 
@@ -63,10 +63,6 @@ public class MenuScreen extends Screen {
 
 	}
 
-	public void onSelect( int option ) {
-		if ( option == 0 ) {
-			RenderingUtils.setScreen( new DungeonScreen( ) );
-		}
-	}
+	public abstract void onSelect( int option );
 
 }

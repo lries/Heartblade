@@ -6,6 +6,7 @@ import java.util.List;
 import asciiPanel.AsciiPanel;
 import heartblades.rendering.GlyphString;
 import heartblades.rendering.Menu;
+import heartblades.rendering.RenderingUtils;
 
 public class MainScreen extends MenuScreen {
 
@@ -21,6 +22,13 @@ public class MainScreen extends MenuScreen {
 		}
 
 		this.menu = new Menu( entries );
+	}
+
+	@Override
+	public void onSelect( int option ) {
+		if ( option == 0 ) {
+			RenderingUtils.setScreen( new DungeonScreen( ) );
+		}
 	}
 
 }
