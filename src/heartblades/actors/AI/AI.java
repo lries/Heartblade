@@ -3,6 +3,7 @@ package heartblades.actors.AI;
 import java.awt.event.KeyEvent;
 
 import heartblades.actors.Actor;
+import heartblades.core.Core;
 
 public class AI {
 
@@ -21,7 +22,7 @@ public class AI {
 	}
 
 	public boolean onTurn( KeyEvent e ) {
-		System.out.println( "WARNING: Non-player KeyEvent turn" );
+		Core.debug( "WARNING: Non-player KeyEvent turn" );
 		onTurn( );
 		return true;
 	}

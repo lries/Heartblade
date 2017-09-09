@@ -2,6 +2,7 @@ package heartblades.actors.AI;
 
 import java.awt.event.KeyEvent;
 
+import heartblades.core.Core;
 import heartblades.movement.Direction;
 import heartblades.rendering.RenderingUtils;
 import heartblades.screens.DungeonScreen;
@@ -15,7 +16,7 @@ public class PlayerAI extends AI {
 	
 	@Override
 	public void onTurn() { 
-		System.out.println("Player turn");
+		Core.debug("Player turn");
 	}
 	
 	@Override

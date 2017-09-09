@@ -26,7 +26,7 @@ public class Dungeon {
 
 	public void setFloorUp( Dungeon floorUp, int[] stairsUpLoc, Glyph stairsUpGlyph ) {
 		if ( floorUp == this ) {
-			System.out.println( "Warning!" );
+			Core.debug( "Warning in setFloorUp!" );
 		}
 		this.floorUp = floorUp;
 		this.stairsUpLoc = stairsUpLoc;
@@ -35,7 +35,7 @@ public class Dungeon {
 
 	public void setFloorDown( Dungeon floorDown, int[] stairsDownLoc, Glyph stairsDownGlyph ) {
 		if ( floorDown == this ) {
-			System.out.println( "Warning!" );
+			Core.debug( "Warning in setFloorDown!" );
 		}
 		this.floorDown = floorDown;
 		this.stairsDownLoc = stairsDownLoc;

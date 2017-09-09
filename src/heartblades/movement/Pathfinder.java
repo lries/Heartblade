@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import heartblades.core.Core;
 import heartblades.map.Dungeon;
 
 public class Pathfinder {
@@ -58,11 +59,11 @@ public class Pathfinder {
 				}
 			}
 			if ( nodesVisitedCount > maximumSearchDepth ) {
-				System.out.println( "Node limit reached" );
+				Core.debug( "Node limit reached" );
 				return null;
 			}
 		}
-		System.out.println( start.toString( ) + " " + end.toString( ) );
+		Core.debug( start.toString( ) + " " + end.toString( ) );
 		return Backwards( visited.get( visited.size( ) - 1 ), start );
 
 	}

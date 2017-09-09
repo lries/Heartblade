@@ -33,7 +33,7 @@ public class ObjectPlacer {
 		downD.setFloorUp( upD, new int[] { posXDown, posYDown },
 				new Glyph( '<', down[posXDown][posYDown].getGlyph( ).getColor( ) ) );
 
-		System.out.println( posXUp + " " + posYUp );
+		Core.debug( posXUp + " " + posYUp );
 
 	}
 

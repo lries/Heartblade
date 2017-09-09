@@ -3,6 +3,7 @@ package heartblades.movement;
 import java.util.ArrayList;
 import java.util.List;
 
+import heartblades.core.Core;
 import heartblades.map.Dungeon;
 import heartblades.map.Shape;
 
@@ -68,7 +69,7 @@ public class CircularRange {
 	}
 
 	public void setDungeon( Dungeon dungeon ) {
-		System.out.println( "Setting dungeon" );
+		Core.debug( "Setting dungeon" );
 		this.dungeon = dungeon;
 		calculateRange( );
 	}

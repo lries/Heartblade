@@ -67,7 +67,6 @@ public class Actor {
 	}
 
 	public void setDungeon( Dungeon dungeon, int x, int y ) {
-		System.out.println( ":" );
 		this.dungeon = dungeon;
 		this.posX = x;
 		this.posY = y;
