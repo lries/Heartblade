@@ -89,7 +89,7 @@ public class Pathfinder {
 		}
 		Collections.reverse( bw );
 		for ( int[] element : bw ) {
-			System.out.println( element.length + " " + element[0] + " " + element[1] );
+			Core.debug( element.length + " " + element[0] + " " + element[1] );
 		}
 		return bw;
 	}
