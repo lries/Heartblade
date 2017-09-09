@@ -6,7 +6,7 @@ import java.util.List;
 import heartblades.map.Dungeon;
 import heartblades.map.Shape;
 
-public class Range {
+public class CircularRange {
 
 	protected List<int[]> points;
 	protected Dungeon dungeon;
@@ -15,7 +15,7 @@ public class Range {
 	protected int cy;
 	protected int radius;
 
-	public Range( Dungeon dungeon, MovementTag[] movement, int cx, int cy, int radius ) {
+	public CircularRange( Dungeon dungeon, MovementTag[] movement, int cx, int cy, int radius ) {
 		this.dungeon = dungeon;
 		this.movement = movement;
 		this.cx = cx;
