@@ -15,6 +15,9 @@ public class ApplicationMain extends JFrame implements KeyListener {
 
 	private AsciiPanel terminal;
 
+	private long timeSinceLastKeyEvent = 1000000;
+	private long timeOfLastKeyEvent = 0;
+
 	public ApplicationMain( ) {
 		super( );
 		RenderingUtils.setApplicationMain( this );
@@ -32,13 +35,20 @@ public class ApplicationMain extends JFrame implements KeyListener {
 		System.out.println( "repainting" );
 		terminal.clear( );
 		RenderingUtils.getScreen( ).render( );
-		terminal.repaint( );
 		super.repaint( );
+
 	}
 
 	@Override
 	public void keyPressed( KeyEvent e ) {
+		timeSinceLastKeyEvent = System.currentTimeMillis( ) - timeOfLastKeyEvent;
+		if ( timeSinceLastKeyEvent < 100 ) {
+			System.out.println( timeSinceLastKeyEvent );
+			return;
+		}
+		timeOfLastKeyEvent = System.currentTimeMillis( );
 		RenderingUtils.getScreen( ).onTurn( e );
+		Core.log.log( e );
 		repaint( );
 	}
 

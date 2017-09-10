@@ -8,9 +8,9 @@ import java.util.PriorityQueue;
 import heartblades.actors.Actor;
 import heartblades.core.Core;
 import heartblades.factory.TileFactory;
+import heartblades.movement.CircularRange;
 import heartblades.movement.Direction;
 import heartblades.movement.MovementTag;
-import heartblades.movement.CircularRange;
 import heartblades.procgen.DrunkenCorridors;
 import heartblades.procgen.FloorActorGeneration;
 import heartblades.rendering.Glyph;
@@ -145,23 +145,35 @@ public class Dungeon {
 
 		Actor mover = null;
 		while ( true ) {
+			Core.debug( "Starting turn: " + System.currentTimeMillis( ) );
 			mover = turnOrder.remove( );
 
 			if ( mover == null || mover == Core.player ) {
 				break;
 			}
 
-			System.out.println( "Plant turn" );
-
 			TUs = mover.getTU( );
+			int oldX = mover.getX( );
+			int oldY = mover.getY( );
 			mover.onTurn( );
+			int newX = mover.getX( );
+			int newY = mover.getY( );
+			Core.debug( "Reducing TUs: " + System.currentTimeMillis( ) );
 			decreaseAllTUs( TUs );
+			Core.debug( "TUs reduced, adding to queue: " + System.currentTimeMillis( ) );
 
 			turnOrder.add( mover );
 
-			render( minX, maxX, minY, maxY );
-			RenderingUtils.repaint( );
+			Core.debug( "Rendering: " + System.currentTimeMillis( ) );
+			if ( (oldX > minX && oldX < maxX && oldY > minY && oldY < maxY)
+					|| (newX > minX && newX < maxX && newY > minY && newY < maxY) ) {
+				System.out.println( "RE-RENDERING" );
+				render( minX, maxX, minY, maxY );
+				RenderingUtils.repaint( );
+			}
+			Core.debug( "Rendered: " + System.currentTimeMillis( ) );
 		}
+
 	}
 
 	protected void decreaseAllTUs( int TUs ) {
