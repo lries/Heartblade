@@ -164,12 +164,21 @@ public class Dungeon {
 
 			turnOrder.add( mover );
 
-			Core.debug( "Rendering: " + System.currentTimeMillis( ) );
-			if ( (oldX > minX && oldX < maxX && oldY > minY && oldY < maxY)
-					|| (newX > minX && newX < maxX && newY > minY && newY < maxY) ) {
-				System.out.println( "RE-RENDERING" );
-				render( minX, maxX, minY, maxY );
-				RenderingUtils.repaint( );
+			Core.debug( "Considering rendering: " + System.currentTimeMillis( ) );
+			/*
+			 * if ( (oldX > minX && oldX < maxX && oldY > minY && oldY < maxY)
+			 * || (newX > minX && newX < maxX && newY > minY && newY < maxY) ) {
+			 * System.out.println( "RE-RENDERING" ); render( minX, maxX, minY,
+			 * maxY ); RenderingUtils.repaint( ); }
+			 */
+			List<int[]> los = Core.player.getRange( ).getRange( );
+			for ( int[] point : los ) {
+				if ( (point[0] == oldX && point[1] == oldY) || (point[0] == newX && point[1] == newY) ) {
+					System.out.println( "RE-RENDERING" );
+					render( minX, maxX, minY, maxY );
+					RenderingUtils.repaint( );
+
+				}
 			}
 			Core.debug( "Rendered: " + System.currentTimeMillis( ) );
 		}
